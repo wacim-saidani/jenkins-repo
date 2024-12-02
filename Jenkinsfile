@@ -27,8 +27,11 @@ pipeline {
                     reuseNode true
                 } }
             steps{
+                
                 echo 'Test Stage'
-                sh'npm test'
+                sh''' 
+                npm test 
+                npm ci '''
             }
             
         }

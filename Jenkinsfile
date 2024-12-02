@@ -51,6 +51,7 @@ pipeline {
                     }
                     steps{
                         sh '''
+                            npm install @playwright/test --save-dev
                             npm install serve
                             node_modules/.bin/serve -s build &
                             sleep 10

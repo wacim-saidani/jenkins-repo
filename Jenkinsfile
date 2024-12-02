@@ -28,11 +28,13 @@ pipeline {
                 } }
             steps{
                 echo 'Test Stage'
-                sh '''
-                    #test -f build/index.html
-                    npm test
-                '''
+                sh'npm test'
             }
+             post {
+        always{
+            junit 'test-results/junit.xml'
+        }
+    }
         }
     
     stage('E2E') {
@@ -51,10 +53,6 @@ pipeline {
             }
         }
     }
-    post {
-        always{
-            junit 'jest-results/junit.xml'
-        }
-    }
+   
 }
 

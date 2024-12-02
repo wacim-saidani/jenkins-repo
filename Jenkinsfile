@@ -36,10 +36,17 @@ pipeline {
                         npm ci '''
                     }
                     post {
+<<<<<<< HEAD
                         always{
                             junit 'jest-results/junit.xml'
                         }
                     }
+=======
+                always{
+                    junit 'jest-results/junit.xml'
+                 }
+            }
+>>>>>>> ca8545bae9a4356aa266f69bfa4311a05f3671ce
                 }
             
             stage('E2E') {
@@ -58,6 +65,7 @@ pipeline {
                         '''
                     }
                 post {
+<<<<<<< HEAD
                     always{
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
                     
@@ -70,3 +78,18 @@ pipeline {
      
    
 }
+=======
+                always{
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', 
+                                 reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                    
+                 }
+            }
+                }
+            }
+    }
+    }
+     
+   
+}
+>>>>>>> ca8545bae9a4356aa266f69bfa4311a05f3671ce

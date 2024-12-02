@@ -25,7 +25,7 @@ pipeline {
                 docker{
                     image 'node:18-alpine'
                     reuseNode true
-                }
+                } }
             steps{
                 echo 'Test Stage'
                 sh '''

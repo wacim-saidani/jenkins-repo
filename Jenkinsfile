@@ -29,9 +29,10 @@ pipeline {
             steps{
                 
                 echo 'Test Stage'
-                sh''' 
+                sh'''
+                npm ci 
                 npm test 
-                npm ci '''
+                 '''
             }
             
         }

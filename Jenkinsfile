@@ -32,8 +32,9 @@ pipeline {
                         
                         echo 'Test Stage'
                         sh''' 
+                        npm ci
                         npm test 
-                        npm ci '''
+                         '''
                     }
                     post {
                         always{

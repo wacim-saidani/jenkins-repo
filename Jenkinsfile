@@ -95,9 +95,10 @@ pipeline {
                             image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
                             reuseNode true
                         }
+                    
+                    }
                     environment{
                        CI_ENVIRONMENT_URL= 'https://venerable-froyo-f2d7c4.netlify.app' 
-                    }
                     }
                     steps{
                         sh '''

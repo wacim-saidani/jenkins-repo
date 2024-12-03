@@ -5,8 +5,8 @@ pipeline {
         NETLIFY_SITE_ID= 'e0101d28-7db6-4a72-bb45-e025addaf313'
     }
 
-   /* stages {
-        stage('Build') {
+   stages {
+        /*stage('Build') {
             agent{
                 docker{
                     image 'node:18-alpine'

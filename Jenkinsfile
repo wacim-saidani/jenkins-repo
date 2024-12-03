@@ -51,7 +51,7 @@ pipeline {
             stage('E2E') {
                     agent{
                         docker{
-                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                            image 'mcr.microsoft.com/playwright:v1.46.0-noble'
                             reuseNode true
                         } 
                     }
@@ -72,7 +72,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy'){
+        stage('Deploy Prod'){
             agent{
                 docker{
                     image 'node:18-alpine'
@@ -89,10 +89,27 @@ pipeline {
                 '''
             }
         }
-       stage('PROD E2E') {
+       stage('Deploy Staging'){
+            agent{
+                docker{
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps{
+                sh '''
+                npm install --save-dev netlify-cli
+                node_modules/.bin/netlify --version
+                echo "Deploying to production . Site ID: $NETLIFY_SITE_ID"
+                node_modules/.bin/netlify status
+                node_modules/.bin/netlify deploy --dir=build
+                '''
+            }
+        }
+       stage('Prod E2E') {
                     agent{
                         docker{
-                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                            image 'mcr.microsoft.com/playwright:v1.46.0-noble'
                             reuseNode true
                         }
                     

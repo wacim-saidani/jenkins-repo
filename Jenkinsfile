@@ -3,10 +3,11 @@ pipeline {
     
     environment{
         NETLIFY_SITE_ID= 'e0101d28-7db6-4a72-bb45-e025addaf313'
+        NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
    stages {
-        /*stage('Build') {
+        stage('Build') {
             agent{
                 docker{
                     image 'node:18-alpine'
@@ -71,7 +72,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
         stage('Deploy'){
             agent{
                 docker{
@@ -85,6 +86,7 @@ pipeline {
                 npm install --save-dev netlify-cli
                 node_modules/.bin/netlify --version
                 echo "Deploying to production . Site ID: $NETLIFY_SITE_ID"
+                node_modules/.bin/netlify status
                 '''
             }
         }

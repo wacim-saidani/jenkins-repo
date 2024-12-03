@@ -37,7 +37,6 @@ pipeline {
                         
                         echo 'Test Stage'
                         sh''' 
-                        npm ci
                         npm test 
                          '''
                     }
@@ -57,7 +56,6 @@ pipeline {
                     }
                     steps{
                         sh '''
-                            npm ci
                             npm install serve
                             node_modules/.bin/serve -s build &
                             sleep 10
@@ -82,11 +80,11 @@ pipeline {
             }
             steps{
                 sh '''
-                npm ci
                 npm install --save-dev netlify-cli
                 node_modules/.bin/netlify --version
                 echo "Deploying to production . Site ID: $NETLIFY_SITE_ID"
                 node_modules/.bin/netlify status
+                node_modules/.bin/netlify deploy --dir=build --prod
                 '''
             }
         }

@@ -81,18 +81,22 @@ pipeline {
             }
             steps{
                 sh '''
-                npm install --save-dev netlify-cli
+                npm install --save-dev netlify-cli node-jq
                 node_modules/.bin/netlify --version
                 echo "Deploying to production . Site ID: $NETLIFY_SITE_ID"
                 node_modules/.bin/netlify status
-                node_modules/.bin/netlify deploy --dir=build
+                node_modules/.bin/netlify deploy --dir=build --json > deploy-output.json
+                node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json
                 '''
             }
         }
        
        stage('Approval'){
            steps{
-               input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
+              timeout(15) {
+                 input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
+                }
+               
            }
        }
        
@@ -105,7 +109,7 @@ pipeline {
             }
             steps{
                 sh '''
-                npm install --save-dev netlify-cli
+                npm install --save-dev netlify-cli 
                 node_modules/.bin/netlify --version
                 echo "Deploying to production . Site ID: $NETLIFY_SITE_ID"
                 node_modules/.bin/netlify status

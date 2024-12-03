@@ -82,7 +82,7 @@ pipeline {
                     
                     }
                     environment{
-                        CI_ENVIRONMENT_URL=NULL
+                        CI_ENVIRONMENT_URL= 'NULL'
                        
                     }
                     steps{
